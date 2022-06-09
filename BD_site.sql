@@ -1,0 +1,45 @@
+CREATE TABLE User_(
+   ID INT AUTO_INCREMENT,
+   Nom_ VARCHAR(50) NOT NULL,
+   Prenom VARCHAR(50) NOT NULL,
+   Password VARCHAR(50) NOT NULL,
+   PRIMARY KEY(ID)
+);
+
+CREATE TABLE Produit(
+   ID INT AUTO_INCREMENT,
+   Nom VARCHAR(50) NOT NULL,
+   Description_ VARCHAR(50) NOT NULL,
+   PRIMARY KEY(ID),
+   UNIQUE(Nom)
+);
+
+CREATE TABLE Date_(
+   Date_ DATE,
+   PRIMARY KEY(Date_)
+);
+
+CREATE TABLE categorie(
+   ID INT AUTO_INCREMENT,
+   Nom VARCHAR(50) NOT NULL,
+   PRIMARY KEY(ID),
+   UNIQUE(Nom)
+);
+
+CREATE TABLE commander(
+   ID INT,
+   ID_1 INT,
+   Date_ DATE,
+   PRIMARY KEY(ID, ID_1, Date_),
+   FOREIGN KEY(ID) REFERENCES User_(ID),
+   FOREIGN KEY(ID_1) REFERENCES Produit(ID),
+   FOREIGN KEY(Date_) REFERENCES Date_(Date_)
+);
+
+CREATE TABLE appartient(
+   ID INT,
+   ID_1 INT,
+   PRIMARY KEY(ID, ID_1),
+   FOREIGN KEY(ID) REFERENCES Produit(ID),
+   FOREIGN KEY(ID_1) REFERENCES categorie(ID)
+);
